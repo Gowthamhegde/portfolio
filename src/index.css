@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { 
+  color-scheme: dark; 
+  --gradient-1: linear-gradient(90deg, #4158D0, #C850C0);
+  --gradient-2: linear-gradient(90deg, #3B82F6, #10B981);
+  --gradient-3: linear-gradient(90deg, #FFCC70, #C850C0);
+  --gradient-4: linear-gradient(90deg, #3EECAC, #EE74E1);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+html, body, #root { height: 100%; }
+
+body { 
+  @apply bg-bg text-text antialiased; 
+  background-image: radial-gradient(circle at top right, rgba(65, 88, 208, 0.15) 0%, transparent 40%), 
+                    radial-gradient(circle at bottom left, rgba(200, 80, 192, 0.1) 0%, transparent 30%);
+  background-attachment: fixed;
+}
+
+.gradient-text { 
+  background: var(--gradient-2);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+}
+
+.card { 
+  @apply bg-card border border-white/10 rounded-2xl backdrop-blur-xs;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.link { 
+  @apply text-primary hover:text-accent transition-all; 
+  position: relative;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: var(--gradient-1);
+  transition: width 0.2s ease;
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+.tag { 
+  @apply px-3 py-1 rounded-full text-sm text-subtext; 
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.section-title { 
+  @apply text-3xl md:text-4xl font-semibold; 
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-1);
+  border-radius: 3px;
+}
