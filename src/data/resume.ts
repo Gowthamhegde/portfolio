@@ -16,7 +16,7 @@ export const profile = {
 export const skills = {
   programming: ["Python", "Java", "SQL", "C"],
   libraries: ["NumPy", "Pandas", "YOLO", "Ultralytics", "OpenCV"],
-  tools: ["Jupyter", "GitHub", "AWS"],
+  tools: ["Linux", "GitHub", "AWS","Anisble","Terraform","Docker","kubernetes"],
   soft: ["Communication", "Team Collaboration", "Problem-Solving", "Critical Thinking"]
 };
 
