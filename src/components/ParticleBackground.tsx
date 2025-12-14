@@ -1,9 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, memo } from "react";
 import Particles from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 
-export default function ParticleBackground() {
+const ParticleBackground = memo(() => {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
@@ -44,13 +44,13 @@ export default function ParticleBackground() {
         },
         particles: {
           color: {
-            value: ["#06b6d4", "#3b82f6", "#0ea5e9", "#22d3ee"],
+            value: "#06b6d4",
           },
           links: {
             color: "#06b6d4",
-            distance: 150,
+            distance: 120,
             enable: true,
-            opacity: 0.3,
+            opacity: 0.2,
             width: 1,
           },
           move: {
@@ -60,28 +60,32 @@ export default function ParticleBackground() {
               default: "bounce",
             },
             random: false,
-            speed: 1,
+            speed: 0.5,
             straight: false,
           },
           number: {
             density: {
               enable: true,
-              area: 800,
+              area: 1000,
             },
-            value: 80,
+            value: 30,
           },
           opacity: {
-            value: 0.5,
+            value: 0.3,
           },
           shape: {
             type: "circle",
           },
           size: {
-            value: { min: 1, max: 5 },
+            value: { min: 1, max: 3 },
           },
         },
         detectRetina: true,
       }}
     />
   );
-}
+});
+
+ParticleBackground.displayName = 'ParticleBackground';
+
+export default ParticleBackground;

@@ -1,38 +1,91 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import NavBar from "./components/NavBar";
 import Hero from "./components/Hero";
 import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Experience from "./components/Experience";
-import Education from "./components/Education";
-import Certifications from "./components/Certifications";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import InteractiveTerminal from "./components/InteractiveTerminal";
-import AWSArchitecture from "./components/AWSArchitecture";
-import DevOpsPipeline from "./components/DevOpsPipeline";
-import GitHubStats from "./components/GitHubStats";
+import PerformanceOptimizer from "./components/PerformanceOptimizer";
+
+// Lazy load only the heaviest components
+const Projects = lazy(() => import("./components/Projects"));
+const InteractiveTerminal = lazy(() => import("./components/InteractiveTerminal"));
+const GitHubStats = lazy(() => import("./components/GitHubStats"));
+const Experience = lazy(() => import("./components/Experience"));
+const Education = lazy(() => import("./components/Education"));
+const Certifications = lazy(() => import("./components/Certifications"));
+const Contact = lazy(() => import("./components/Contact"));
 
 export default function App() {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Always force scroll to home on page load/reload
+    const forceScrollToHome = () => {
+      // Clear any hash from URL without triggering navigation
+      if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+      
+      // Immediately scroll to top
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      
+      // Then smooth scroll to home section after components load
+      const timer = setTimeout(() => {
+        const homeSection = document.getElementById('home');
+        if (homeSection) {
+          homeSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 500);
+      
+      return timer;
+    };
+
+    // Force scroll to home on mount
+    const timer = forceScrollToHome();
+
+    // Prevent any automatic scrolling from browser
+    const preventAutoScroll = (e: Event) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+
+    // Add event listener to prevent unwanted scrolling
+    window.addEventListener('beforeunload', preventAutoScroll);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('beforeunload', preventAutoScroll);
+    };
   }, []);
 
   return (
     <div className="min-h-screen flex flex-col relative bg-gradient-to-br from-slate-950 via-cyan-950 to-slate-950">
+      <PerformanceOptimizer />
       <NavBar />
       <main className="flex-grow">
         <Hero />
         <Skills />
-        <InteractiveTerminal />
-        <AWSArchitecture />
-        <DevOpsPipeline />
-        <Projects />
-        <GitHubStats />
-        <Experience />
-        <Education />
-        <Certifications />
-        <Contact />
+        <Suspense fallback={null}>
+          <Projects />
+        </Suspense>
+        <Suspense fallback={null}>
+          <InteractiveTerminal />
+        </Suspense>
+        <Suspense fallback={null}>
+          <GitHubStats />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Experience />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Education />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Certifications />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
     </div>

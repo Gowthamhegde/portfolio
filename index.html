@@ -24,11 +24,44 @@
   
   <!-- Preload critical resources -->
   <link rel="preload" href="/profilepic.jpg" as="image" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" />
   
-  <!-- Google Fonts -->
+  <!-- Optimized Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+  
+  <!-- DNS prefetch for better performance -->
+  <!-- DNS prefetch for better performance -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  
+  <!-- Force page to always start at top -->
+  <script>
+    // Disable browser scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    
+    // Clear any hash from URL
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+    
+    // Force scroll to top immediately
+    window.scrollTo(0, 0);
+    
+    // Prevent any scroll events during page load
+    document.addEventListener('DOMContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
+    
+    // Also prevent on window load
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+    });
+  </script>
 </head>
 <body>
   <div id="root"></div>
