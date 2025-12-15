@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { skills } from "../data/resume";
-import { FaCode, FaTools, FaCloud, FaUsers, FaPython, FaAws, FaDocker, FaGitAlt } from "react-icons/fa";
+import { FaCode, FaTools, FaCloud, FaUsers, FaPython, FaAws, FaDocker, FaGitAlt, FaCheckCircle, FaArrowRight } from "react-icons/fa";
 import { SiKubernetes, SiTerraform, SiJenkins, SiMongodb, SiMysql, SiNumpy, SiPandas, SiOpencv } from "react-icons/si";
 
 const getSkillIcon = (skill: string) => {
@@ -59,25 +59,44 @@ const skillCategories = [
   }
 ];
 
-const skillLevels = {
-  "Python": 90,
-  "Java": 85,
-  "SQL": 80,
-  "C": 75,
-  "AWS": 85,
-  "Linux": 80,
-  "GitHub": 90,
-  "Docker": 75,
-  "Kubernetes": 70,
-  "Terraform": 65,
-  "Jenkins": 70,
-  "Ansible": 60,
-  "NumPy": 85,
-  "Pandas": 80,
-  "YOLO": 75,
-  "Ultralytics": 70,
-  "OpenCV": 75
-};
+const cicdPipeline = [
+  {
+    name: "Code",
+    icon: FaGitAlt,
+    description: "Version Control",
+    color: "from-gray-600 to-gray-800"
+  },
+  {
+    name: "Build",
+    icon: SiJenkins,
+    description: "CI/CD Pipeline",
+    color: "from-blue-500 to-blue-700"
+  },
+  {
+    name: "Test",
+    icon: FaCheckCircle,
+    description: "Automated Testing",
+    color: "from-green-500 to-green-700"
+  },
+  {
+    name: "Package",
+    icon: FaDocker,
+    description: "Containerization",
+    color: "from-cyan-500 to-cyan-700"
+  },
+  {
+    name: "Deploy",
+    icon: SiKubernetes,
+    description: "Orchestration",
+    color: "from-purple-500 to-purple-700"
+  },
+  {
+    name: "Monitor",
+    icon: FaAws,
+    description: "Cloud Infrastructure",
+    color: "from-orange-500 to-orange-700"
+  }
+];
 
 export default function Skills() {
   return (
@@ -185,7 +204,6 @@ export default function Skills() {
               <div className="relative z-10 grid grid-cols-1 gap-4">
                 {category.skills.map((skill, skillIndex) => {
                   const IconComponent = getSkillIcon(skill);
-                  const level = skillLevels[skill as keyof typeof skillLevels] || 70;
                   
                   return (
                     <motion.div
@@ -200,39 +218,9 @@ export default function Skills() {
                       whileHover={{ scale: 1.02, x: 5 }}
                       className="group/skill"
                     >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-3">
-                          <IconComponent className="text-xl text-cyan-400 group-hover/skill:scale-110 transition-transform duration-300" />
-                          <span className="text-white font-medium">{skill}</span>
-                        </div>
-                        <span className="text-gray-400 text-sm font-medium">{level}%</span>
-                      </div>
-                      
-                      <div className="relative">
-                        <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${level}%` }}
-                            transition={{ 
-                              duration: 1.5, 
-                              delay: categoryIndex * 0.1 + skillIndex * 0.1,
-                              ease: "easeOut"
-                            }}
-                            viewport={{ once: true }}
-                            className={`h-full bg-gradient-to-r ${category.gradient} rounded-full relative overflow-hidden`}
-                          >
-                            <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
-                            <motion.div
-                              animate={{ x: [-20, 100, -20] }}
-                              transition={{ 
-                                duration: 2, 
-                                repeat: Infinity, 
-                                ease: "linear" 
-                              }}
-                              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent w-8"
-                            />
-                          </motion.div>
-                        </div>
+                      <div className="flex items-center gap-3 p-3 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-all duration-300">
+                        <IconComponent className="text-xl text-cyan-400 group-hover/skill:scale-110 transition-transform duration-300" />
+                        <span className="text-white font-medium">{skill}</span>
                       </div>
                     </motion.div>
                   );
@@ -242,21 +230,115 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Skills Summary */}
+        {/* CI/CD Pipeline */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="card p-8 text-center"
+          className="card p-8"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">CI/CD Pipeline Workflow</h3>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Automated development workflow from code commit to production deployment
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Pipeline Flow */}
+            <div className="flex flex-wrap justify-center items-center gap-6 lg:gap-8">
+              {cicdPipeline.map((stage, index) => (
+                <div key={index} className="flex flex-col items-center relative">
+                  {/* Stage Icon */}
+                  <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.6, delay: index * 0.15 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.1, y: -5 }}
+                    className={`w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-r ${stage.color} flex items-center justify-center mb-4 shadow-lg hover:shadow-xl transition-all duration-300`}
+                  >
+                    <stage.icon className="text-xl lg:text-2xl text-white" />
+                  </motion.div>
+
+                  {/* Stage Info */}
+                  <div className="text-center max-w-24 lg:max-w-32">
+                    <h4 className="text-white font-semibold text-sm lg:text-base mb-1">{stage.name}</h4>
+                    <p className="text-gray-400 text-xs">{stage.description}</p>
+                  </div>
+
+                  {/* Arrow */}
+                  {index < cicdPipeline.length - 1 && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.15 + 0.3 }}
+                      viewport={{ once: true }}
+                      className="hidden lg:block absolute top-8 left-full ml-4"
+                    >
+                      <FaArrowRight className="text-cyan-400 text-xl" />
+                    </motion.div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Pipeline Benefits */}
+            <div className="grid md:grid-cols-3 gap-6 mt-16">
+              {[
+                {
+                  title: "Automated Testing",
+                  description: "Unit tests, integration tests, and security scans",
+                  icon: FaCheckCircle,
+                  color: "text-green-400"
+                },
+                {
+                  title: "Infrastructure as Code",
+                  description: "Terraform manages all infrastructure with version control",
+                  icon: SiTerraform,
+                  color: "text-purple-400"
+                },
+                {
+                  title: "Container Orchestration",
+                  description: "Kubernetes for scalable and reliable deployments",
+                  icon: SiKubernetes,
+                  color: "text-blue-400"
+                }
+              ].map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                  className="bg-slate-800/30 p-6 rounded-lg text-center hover:bg-slate-800/50 transition-all duration-300"
+                >
+                  <benefit.icon className={`text-3xl ${benefit.color} mx-auto mb-4`} />
+                  <h4 className="text-lg font-semibold text-white mb-3">{benefit.title}</h4>
+                  <p className="text-gray-400 text-sm">{benefit.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Skills Summary */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="card p-8 text-center mt-8"
         >
           <h3 className="text-2xl font-bold text-white mb-6">Technical Proficiency Overview</h3>
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { label: "Programming", level: "Expert", percentage: 85, color: "text-blue-400" },
-              { label: "Cloud & DevOps", level: "Advanced", percentage: 75, color: "text-orange-400" },
-              { label: "Frameworks", level: "Proficient", percentage: 80, color: "text-green-400" },
-              { label: "Collaboration", level: "Expert", percentage: 90, color: "text-purple-400" }
+              { label: "Programming", level: "Expert", color: "text-blue-400" },
+              { label: "Cloud & DevOps", level: "Advanced", color: "text-orange-400" },
+              { label: "Frameworks", level: "Proficient", color: "text-green-400" },
+              { label: "Collaboration", level: "Expert", color: "text-purple-400" }
             ].map((skill, index) => (
               <motion.div
                 key={index}
@@ -264,44 +346,11 @@ export default function Skills() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="relative"
+                whileHover={{ scale: 1.05 }}
+                className="relative p-6 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-all duration-300"
               >
-                <div className="relative w-24 h-24 mx-auto mb-4">
-                  <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      stroke="currentColor"
-                      strokeWidth="8"
-                      fill="transparent"
-                      className="text-slate-700"
-                    />
-                    <motion.circle
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      stroke="currentColor"
-                      strokeWidth="8"
-                      fill="transparent"
-                      strokeLinecap="round"
-                      className={skill.color}
-                      initial={{ strokeDasharray: "0 251.2" }}
-                      whileInView={{ 
-                        strokeDasharray: `${(skill.percentage / 100) * 251.2} 251.2` 
-                      }}
-                      transition={{ duration: 2, delay: index * 0.2 }}
-                      viewport={{ once: true }}
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className={`text-xl font-bold ${skill.color}`}>
-                      {skill.percentage}%
-                    </span>
-                  </div>
-                </div>
-                <div className="text-white font-semibold mb-1">{skill.label}</div>
-                <div className="text-gray-400 text-sm">{skill.level}</div>
+                <div className={`text-3xl font-bold ${skill.color} mb-2`}>{skill.level}</div>
+                <div className="text-white font-semibold">{skill.label}</div>
               </motion.div>
             ))}
           </div>
