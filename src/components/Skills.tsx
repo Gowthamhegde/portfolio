@@ -344,12 +344,6 @@ export default function Skills() {
                     </h3>
                     <p className="text-gray-400 text-xs">{category.description}</p>
                   </div>
-                  <div className="text-right">
-                    <div className={`text-2xl font-bold bg-gradient-to-r ${category.gradient} bg-clip-text text-transparent`}>
-                      {category.skills.length}
-                    </div>
-                    <div className="text-gray-500 text-xs">Skills</div>
-                  </div>
                 </div>
               </div>
 
@@ -380,29 +374,7 @@ export default function Skills() {
                 })}
               </div>
 
-              {/* Skill Category Stats */}
-              <div className="relative z-10 mt-6 pt-4 border-t border-slate-700/50">
-                <div className="flex justify-between items-center text-xs">
-                  <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${category.gradient}`}></div>
-                    <span className="text-gray-400">Proficiency Level</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.2, delay: categoryIndex * 0.1 + i * 0.05 }}
-                        viewport={{ once: true }}
-                        className={`w-2 h-2 rounded-full ${
-                          i < 4 ? `bg-gradient-to-r ${category.gradient}` : 'bg-slate-600'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
+
             </motion.div>
           ))}
         </div>
