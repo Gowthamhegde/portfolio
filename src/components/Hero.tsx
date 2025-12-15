@@ -26,7 +26,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <h1 className="text-5xl lg:text-7xl font-bold text-white mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 hero-text">
                 <span className="block">GOWTHAMA</span>
                 <span className="block gradient-text">HEGDE</span>
               </h1>
@@ -36,7 +36,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl lg:text-2xl text-cyan-300 font-medium h-16"
+              className="text-lg sm:text-xl lg:text-2xl text-cyan-300 font-medium h-12 sm:h-16"
             >
               <TypeAnimation
                 sequence={[
@@ -69,13 +69,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row gap-4"
             >
               <motion.a
                 href="#contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+                className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 text-center"
               >
                 Get In Touch
               </motion.a>
@@ -83,7 +83,7 @@ export default function Hero() {
                 href="#projects"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 border-2 border-cyan-400 text-cyan-400 font-semibold rounded-full hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300"
+                className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-cyan-400 text-cyan-400 font-semibold rounded-full hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300 text-center"
               >
                 View Projects
               </motion.a>
@@ -151,13 +151,13 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative flex justify-center"
+            className="relative flex justify-center mt-8 lg:mt-0"
           >
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
-              className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-cyan-400/30 shadow-2xl shadow-cyan-500/20"
+              className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-cyan-400/30 shadow-2xl shadow-cyan-500/20"
             >
               <img 
                 src={profile.profilePicture} 

@@ -74,7 +74,7 @@ export default function NavBar() {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-white text-2xl"
+            className="lg:hidden text-white text-2xl p-2 rounded-lg hover:bg-slate-800/50 transition-colors"
           >
             {isOpen ? <FaTimes /> : <FaBars />}
           </motion.button>

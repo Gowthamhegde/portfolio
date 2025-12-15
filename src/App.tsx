@@ -5,6 +5,11 @@ import Skills from "./components/Skills";
 import Footer from "./components/Footer";
 import PerformanceOptimizer from "./components/PerformanceOptimizer";
 
+// Mobile detection hook
+const isMobile = () => {
+  return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
 // Lazy load only the heaviest components
 const Projects = lazy(() => import("./components/Projects"));
 const InteractiveTerminal = lazy(() => import("./components/InteractiveTerminal"));
@@ -16,6 +21,22 @@ const Contact = lazy(() => import("./components/Contact"));
 
 export default function App() {
   useEffect(() => {
+    // Mobile-specific optimizations
+    if (isMobile()) {
+      // Disable zoom on double tap
+      let lastTouchEnd = 0;
+      document.addEventListener('touchend', function (event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+
+      // Add mobile-specific class to body
+      document.body.classList.add('mobile-device');
+    }
+
     // Always force scroll to home on page load/reload
     const forceScrollToHome = () => {
       // Clear any hash from URL without triggering navigation
@@ -26,6 +47,9 @@ export default function App() {
       // Immediately scroll to top
       window.scrollTo({ top: 0, behavior: 'instant' });
       
+      // Adjust delay based on device type
+      const delay = isMobile() ? 300 : 500;
+      
       // Then smooth scroll to home section after components load
       const timer = setTimeout(() => {
         const homeSection = document.getElementById('home');
@@ -35,7 +59,7 @@ export default function App() {
             block: 'start'
           });
         }
-      }, 500);
+      }, delay);
       
       return timer;
     };

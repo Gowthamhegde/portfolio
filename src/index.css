@@ -30,7 +30,7 @@
 html, body, #root { height: 100%; }
 
 body { 
-  @apply bg-bg text-text antialiased; 
+  @apply bg-slate-900 text-white antialiased; 
   background-image: radial-gradient(circle at top right, rgba(65, 88, 208, 0.15) 0%, transparent 40%), 
                     radial-gradient(circle at bottom left, rgba(200, 80, 192, 0.1) 0%, transparent 30%);
   background-attachment: fixed;
@@ -40,12 +40,13 @@ body {
   background: var(--gradient-2);
   background-size: 200% 200%;
   animation: gradientShift 8s ease infinite;
-  -webkit-background-clip: text; 
+  -webkit-background-clip: text;
+  background-clip: text; 
   -webkit-text-fill-color: transparent; 
 }
 
 .card { 
-  @apply bg-card border border-white/10 rounded-2xl backdrop-blur-xs;
+  @apply bg-slate-800/50 border border-white/10 rounded-2xl backdrop-blur-sm;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
@@ -55,7 +56,7 @@ body {
 }
 
 .link { 
-  @apply text-primary hover:text-accent transition-all; 
+  @apply text-cyan-400 hover:text-cyan-300 transition-all; 
   position: relative;
 }
 
@@ -75,7 +76,7 @@ body {
 }
 
 .tag { 
-  @apply px-3 py-1 rounded-full text-sm text-subtext; 
+  @apply px-3 py-1 rounded-full text-sm text-gray-300; 
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -165,27 +166,79 @@ body {
   overflow-anchor: none; /* Prevent scroll anchoring */
 }
 
-/* Custom scrollbar */
+/* Hide scrollbar but keep scroll functionality */
 ::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
+  width: 0px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #06b6d4, #0ea5e9);
-  border-radius: 5px;
+  background: transparent;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #0ea5e9, #22d3ee);
+/* For Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* For Internet Explorer and Edge */
+body {
+  -ms-overflow-style: none;
 }
 
 /* Optimized animations with will-change for better performance */
 .card, .gradient-text, .link {
   will-change: transform;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce animations on mobile for better performance */
+  .animate-pulse, .animate-spin, .animate-blob {
+    animation-duration: 2s !important;
+  }
+  
+  /* Optimize text sizes for mobile */
+  .section-title {
+    @apply text-2xl md:text-4xl;
+  }
+  
+  /* Better spacing on mobile */
+  .container {
+    @apply px-4;
+  }
+  
+  /* Optimize cards for mobile */
+  .card {
+    @apply p-4;
+  }
+  
+  /* Better button sizes for touch */
+  button, .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Optimize hero section for mobile */
+  .hero-text {
+    @apply text-3xl sm:text-4xl md:text-6xl;
+  }
+  
+  /* Better grid layouts on mobile */
+  .grid-responsive {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .section-title {
+    @apply text-3xl;
+  }
+  
+  .hero-text {
+    @apply text-4xl md:text-5xl;
+  }
 }
 
 /* Reduce motion for users who prefer it */
@@ -194,5 +247,64 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile viewport fixes */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Fix viewport issues on mobile */
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Better touch targets */
+  a, button {
+    touch-action: manipulation;
+  }
+  
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  
+  /* Mobile-specific particle optimizations */
+  .particles-container {
+    display: none; /* Hide particles on mobile for better performance */
+  }
+  
+  /* Optimize background gradients for mobile */
+  .bg-gradient-to-br {
+    background: linear-gradient(135deg, #0f172a 0%, #164e63 50%, #0f172a 100%);
+  }
+}
+
+/* Mobile device specific styles */
+.mobile-device {
+  /* Disable text selection on mobile for better UX */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.mobile-device input, 
+.mobile-device textarea {
+  /* Re-enable text selection for inputs */
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
   }
 }
