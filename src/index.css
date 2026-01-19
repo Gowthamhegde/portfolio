@@ -1,310 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root { 
-  color-scheme: dark; 
-  --gradient-1: linear-gradient(90deg, #06b6d4, #3b82f6);
-  --gradient-2: linear-gradient(90deg, #0ea5e9, #06b6d4);
-  --gradient-3: linear-gradient(90deg, #14b8a6, #06b6d4);
-  --gradient-4: linear-gradient(90deg, #22d3ee, #0ea5e9);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+:root {
+  color-scheme: dark;
+  --primary: #00d4ff;
+  --primary-dark: #0099cc;
+  --secondary: #7c3aed;
+  --accent: #06ffa5;
+  --background: #0a0a0f;
+  --surface: #1a1a2e;
+  --text: #ffffff;
+  --text-muted: #a0a0a0;
+  --border: #2a2a3e;
+  
+  /* Cool gradients */
+  --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+  --gradient-secondary: linear-gradient(135deg, #06ffa5 0%, #00d4ff 100%);
+  --gradient-accent: linear-gradient(135deg, #7c3aed 0%, #06ffa5 100%);
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Optimized animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.5); }
 }
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+  50% { transform: scale(1.05); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body, #root { height: 100%; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
 
-body { 
-  @apply bg-slate-900 text-white antialiased; 
-  background-image: radial-gradient(circle at top right, rgba(65, 88, 208, 0.15) 0%, transparent 40%), 
-                    radial-gradient(circle at bottom left, rgba(200, 80, 192, 0.1) 0%, transparent 30%);
+body {
+  background: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  
+  /* Cool background pattern */
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(6, 255, 165, 0.05) 0%, transparent 50%);
   background-attachment: fixed;
 }
 
-.gradient-text { 
-  background: var(--gradient-2);
-  background-size: 200% 200%;
-  animation: gradientShift 8s ease infinite;
-  -webkit-background-clip: text;
-  background-clip: text; 
-  -webkit-text-fill-color: transparent; 
-}
-
-.card { 
-  @apply bg-slate-800/50 border border-white/10 rounded-2xl backdrop-blur-sm;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+/* Component styles */
+.card {
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
   transition: all 0.3s ease;
 }
 
 .card:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: rgba(26, 26, 46, 0.8);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);
 }
 
-.link { 
-  @apply text-cyan-400 hover:text-cyan-300 transition-all; 
-  position: relative;
-}
-
-.link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background: var(--gradient-1);
-  transition: width 0.2s ease;
-}
-
-.link:hover::after {
-  width: 100%;
-}
-
-.tag { 
-  @apply px-3 py-1 rounded-full text-sm text-gray-300; 
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.section-title { 
-  @apply text-3xl md:text-4xl font-semibold; 
-  position: relative;
-  display: inline-block;
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
 }
 
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: var(--gradient-1);
-  border-radius: 3px;
+.btn-secondary {
+  background: rgba(26, 26, 46, 0.8);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Modern 3D Animations */
-@keyframes blob {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(20px, -50px) scale(1.1); }
-  50% { transform: translate(-20px, 20px) scale(0.9); }
-  75% { transform: translate(50px, 50px) scale(1.05); }
+.btn-secondary:hover {
+  background: rgba(26, 26, 46, 1);
+  border-color: var(--primary);
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
-.animation-delay-4000 {
-  animation-delay: 4s;
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-.animation-delay-200 {
-  animation-delay: 0.2s;
+/* Utility classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
 }
 
-.animation-delay-400 {
-  animation-delay: 0.4s;
+.animate-slide-in {
+  animation: slideIn 0.6s ease-out;
 }
 
-/* Glass morphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
-/* Neon glow effect */
-.neon-glow {
-  box-shadow: 0 0 5px theme('colors.cyan.400'),
-              0 0 10px theme('colors.cyan.400'),
-              0 0 20px theme('colors.cyan.400'),
-              0 0 40px theme('colors.cyan.500');
+.animate-pulse-scale {
+  animation: pulse 2s ease-in-out infinite;
 }
 
-/* Enhanced smooth scroll */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Account for fixed navbar */
-}
-
-/* Ensure sections are properly positioned */
-section[id] {
-  scroll-margin-top: 80px;
-}
-
-/* Prevent automatic scrolling to hash targets on page load */
-html:target {
-  scroll-behavior: auto;
-}
-
-/* Force page to start at top */
-body {
-  overflow-anchor: none; /* Prevent scroll anchoring */
-}
-
-/* Hide scrollbar but keep scroll functionality */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: transparent;
+  background: var(--primary);
+  border-radius: 4px;
 }
 
-/* For Firefox */
-html {
-  scrollbar-width: none;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
 }
 
-/* For Internet Explorer and Edge */
-body {
-  -ms-overflow-style: none;
+/* Selection */
+::selection {
+  background: rgba(0, 212, 255, 0.3);
+  color: var(--text);
 }
 
-/* Optimized animations with will-change for better performance */
-.card, .gradient-text, .link {
-  will-change: transform;
+/* Focus styles */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
-/* Mobile-specific optimizations */
+/* Mobile optimizations */
 @media (max-width: 768px) {
-  /* Reduce animations on mobile for better performance */
-  .animate-pulse, .animate-spin, .animate-blob {
-    animation-duration: 2s !important;
-  }
-  
-  /* Optimize text sizes for mobile */
   .section-title {
-    @apply text-2xl md:text-4xl;
+    font-size: 2rem;
   }
   
-  /* Better spacing on mobile */
-  .container {
-    @apply px-4;
-  }
-  
-  /* Optimize cards for mobile */
   .card {
-    @apply p-4;
+    padding: 16px;
   }
   
-  /* Better button sizes for touch */
+  .card:hover {
+    transform: none;
+  }
+  
+  /* Disable heavy animations on mobile */
+  .animate-glow {
+    animation: none;
+  }
+  
+  /* Better touch targets */
   button, .btn {
     min-height: 44px;
     min-width: 44px;
   }
-  
-  /* Optimize hero section for mobile */
-  .hero-text {
-    @apply text-3xl sm:text-4xl md:text-6xl;
-  }
-  
-  /* Better grid layouts on mobile */
-  .grid-responsive {
-    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
-  }
 }
 
-/* Tablet optimizations */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .section-title {
-    @apply text-3xl;
-  }
-  
-  .hero-text {
-    @apply text-4xl md:text-5xl;
-  }
-}
-
-/* Reduce motion for users who prefer it */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
 
-/* Mobile viewport fixes */
-@media (max-width: 768px) {
-  html, body {
-    overflow-x: hidden;
-    width: 100%;
-  }
-  
-  /* Fix viewport issues on mobile */
-  .min-h-screen {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-  }
-  
-  /* Better touch targets */
-  a, button {
-    touch-action: manipulation;
-  }
-  
-  /* Prevent zoom on input focus */
-  input, select, textarea {
-    font-size: 16px;
-  }
-  
-  /* Mobile-specific particle optimizations */
-  .particles-container {
-    display: none; /* Hide particles on mobile for better performance */
-  }
-  
-  /* Optimize background gradients for mobile */
-  .bg-gradient-to-br {
-    background: linear-gradient(135deg, #0f172a 0%, #164e63 50%, #0f172a 100%);
-  }
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
 }
 
-/* Mobile device specific styles */
-.mobile-device {
-  /* Disable text selection on mobile for better UX */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.mobile-device input, 
-.mobile-device textarea {
-  /* Re-enable text selection for inputs */
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
-
-/* iOS Safari specific fixes */
-@supports (-webkit-touch-callout: none) {
-  .min-h-screen {
-    min-height: -webkit-fill-available;
-  }
+.will-change-opacity {
+  will-change: opacity;
 }

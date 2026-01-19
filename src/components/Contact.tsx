@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { profile } from "../data/resume";
 
 export default function Contact() {
+
   return (
     <section id="contact" className="py-20">
       <div className="container mx-auto px-4">
@@ -90,12 +91,14 @@ export default function Contact() {
               
               <div>
                 <h3 className="text-2xl font-semibold mb-4">Send a Message</h3>
-                <form className="space-y-4">
+                <form action="https://formspree.io/f/mykkjnza" method="POST" className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>
                     <input 
                       type="text" 
-                      id="name" 
+                      id="name"
+                      name="name"
+                      required
                       className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
@@ -103,18 +106,26 @@ export default function Contact() {
                     <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
                     <input 
                       type="email" 
-                      id="email" 
+                      id="email"
+                      name="_replyto"
+                      required
                       className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
                     <textarea 
-                      id="message" 
+                      id="message"
+                      name="message"
+                      required
                       rows={4}
                       className="w-full p-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     ></textarea>
                   </div>
+                  
+                  <input type="hidden" name="_subject" value="New Portfolio Contact" />
+                  <input type="hidden" name="_next" value="https://your-portfolio-url.com/thank-you" />
+                  
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

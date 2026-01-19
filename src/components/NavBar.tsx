@@ -5,12 +5,14 @@ import { FaBars, FaTimes } from "react-icons/fa";
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "Skills", href: "#skills" },
-  { name: "DevOps", href: "#devops" },
   { name: "Projects", href: "#projects" },
-  { name: "GitHub", href: "#github" },
   { name: "Experience", href: "#experience" },
+  { name: "Education", href: "#education" },
+  { name: "Certifications", href: "#certifications" },
   { name: "Contact", href: "#contact" }
 ];
+
+
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +26,20 @@ export default function NavBar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleHireMe = () => {
+    // Scroll to contact section
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Optional: You can also add other actions here like:
+    // - Opening a modal
+    // - Showing a notification
+    // - Tracking analytics
+    console.log('Hire Me button clicked!'); // For debugging
+  };
 
   return (
     <motion.nav
@@ -60,14 +76,14 @@ export default function NavBar() {
                 {item.name}
               </motion.a>
             ))}
-            <motion.a
-              href="#contact"
+            <motion.button
+              onClick={handleHireMe}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+              className="px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 cursor-pointer"
             >
               Hire Me
-            </motion.a>
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -104,19 +120,21 @@ export default function NavBar() {
                 {item.name}
               </motion.a>
             ))}
-            <motion.a
-              href="#contact"
+            <motion.button
+              onClick={() => {
+                handleHireMe();
+                setIsOpen(false);
+              }}
               initial={{ opacity: 0, x: -20 }}
               animate={{ 
                 opacity: isOpen ? 1 : 0, 
                 x: isOpen ? 0 : -20 
               }}
               transition={{ delay: navItems.length * 0.1 }}
-              className="inline-block px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 mt-4"
-              onClick={() => setIsOpen(false)}
+              className="block w-full text-left px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 mt-4 cursor-pointer"
             >
               Hire Me
-            </motion.a>
+            </motion.button>
           </div>
         </motion.div>
       </div>
