@@ -1,143 +1,117 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
-  { name: "Education", href: "#education" },
-  { name: "Certifications", href: "#certifications" },
-  { name: "Contact", href: "#contact" }
+const navLinks = [
+  { name: 'HOME', href: '#home' },
+  { name: 'SKILLS', href: '#skills' },
+  { name: 'PROJECTS', href: '#projects' },
+  { name: 'EXPERIENCE', href: '#experience' },
+  { name: 'EDUCATION', href: '#education' },
+  { name: 'CERTS', href: '#certifications' },
+  { name: 'CONTACT', href: '#contact' },
 ];
 
-
-
 export default function NavBar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [active, setActive] = useState('HOME');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleHireMe = () => {
-    // Scroll to contact section
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-    
-    // Optional: You can also add other actions here like:
-    // - Opening a modal
-    // - Showing a notification
-    // - Tracking analytics
-    console.log('Hire Me button clicked!'); // For debugging
-  };
-
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8 }}
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? "bg-slate-900/95 backdrop-blur-md border-b border-cyan-400/20" 
-          : "bg-transparent"
+        scrolled
+          ? 'bg-bg/95 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
+          : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold gradient-text"
-          >
-            Gowthama Hegde
-          </motion.div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </motion.a>
-            ))}
-            <motion.button
-              onClick={handleHireMe}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 cursor-pointer"
-            >
-              Hire Me
-            </motion.button>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-3 group">
+          <div className="relative">
+            <div className="w-8 h-8 rounded border border-terminal/40 bg-terminal/10 flex items-center justify-center">
+              <span className="text-terminal font-mono text-xs font-bold">GH</span>
+            </div>
+            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-terminal animate-pulse" />
           </div>
+          <div className="hidden sm:block">
+            <div className="text-white font-bold text-sm tracking-wide">GOUTHAMA HEGDE</div>
+            <div className="text-subtext font-mono text-[10px] tracking-widest">CLOUD · DEVOPS · ENGINEER</div>
+          </div>
+        </a>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-white text-2xl p-2 rounded-lg hover:bg-slate-800/50 transition-colors"
+        {/* Desktop Nav */}
+        <nav className="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setActive(link.name)}
+              className={`px-3 py-1.5 rounded font-mono text-[11px] font-semibold tracking-widest transition-all duration-200 ${
+                active === link.name
+                  ? 'text-k8s bg-k8s/10 border border-k8s/30'
+                  : 'text-subtext hover:text-white hover:bg-white/5'
+              }`}
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
+
+        {/* CTA + Mobile Toggle */}
+        <div className="flex items-center gap-3">
+          <a
+            href="#contact"
+            className="hidden md:flex btn-primary text-xs py-2 px-4"
           >
-            {isOpen ? <FaTimes /> : <FaBars />}
-          </motion.button>
+            <span className="w-1.5 h-1.5 rounded-full bg-terminal animate-pulse" />
+            HIRE ME
+          </a>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="lg:hidden text-subtext hover:text-white p-2"
+          >
+            <div className="space-y-1.5">
+              <span className={`block w-5 h-0.5 bg-current transition-all ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
+              <span className={`block w-5 h-0.5 bg-current transition-all ${mobileOpen ? 'opacity-0' : ''}`} />
+              <span className={`block w-5 h-0.5 bg-current transition-all ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+            </div>
+          </button>
         </div>
-
-        {/* Mobile Navigation */}
-        <motion.div
-          initial={false}
-          animate={{ height: isOpen ? "auto" : 0 }}
-          transition={{ duration: 0.3 }}
-          className="lg:hidden overflow-hidden"
-        >
-          <div className="py-4 space-y-4">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ 
-                  opacity: isOpen ? 1 : 0, 
-                  x: isOpen ? 0 : -20 
-                }}
-                transition={{ delay: index * 0.1 }}
-                className="block text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </motion.a>
-            ))}
-            <motion.button
-              onClick={() => {
-                handleHireMe();
-                setIsOpen(false);
-              }}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ 
-                opacity: isOpen ? 1 : 0, 
-                x: isOpen ? 0 : -20 
-              }}
-              transition={{ delay: navItems.length * 0.1 }}
-              className="block w-full text-left px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 mt-4 cursor-pointer"
-            >
-              Hire Me
-            </motion.button>
-          </div>
-        </motion.div>
       </div>
-    </motion.nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-bg/98 backdrop-blur-xl border-b border-white/[0.06]"
+          >
+            <div className="px-6 py-4 space-y-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => { setActive(link.name); setMobileOpen(false); }}
+                  className="block px-3 py-2 font-mono text-xs font-semibold tracking-widest text-subtext hover:text-white hover:bg-white/5 rounded transition-all"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }

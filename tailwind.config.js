@@ -3,20 +3,19 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
       colors: {
-        bg: "#0B1220",
-        card: "rgba(255,255,255,0.05)",
-        primary: "#3B82F6",
-        accent: "#10B981",
-        text: "#E5E7EB",
-        subtext: "#94A3B8"
+        bg: "#060b14",
+        card: "rgba(10, 18, 35, 0.8)",
+        aws: "#ff9900",
+        k8s: "#326ce5",
+        terminal: "#00d084",
+        subtext: "#64748b",
+        border: "rgba(255, 255, 255, 0.06)",
       },
-      boxShadow: {
-        glow: "0 0 30px rgba(59,130,246,0.25)"
-      },
-      backdropBlur: {
-        xs: "2px"
-      }
     }
   },
   plugins: []

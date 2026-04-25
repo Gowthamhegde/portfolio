@@ -4,54 +4,35 @@ import Hero from "./components/Hero";
 import Skills from "./components/Skills";
 import Footer from "./components/Footer";
 
-// Lazy load components for better performance
 const Projects = lazy(() => import("./components/Projects"));
 const Experience = lazy(() => import("./components/Experience"));
 const Education = lazy(() => import("./components/Education"));
 const Certifications = lazy(() => import("./components/Certifications"));
 const Contact = lazy(() => import("./components/Contact"));
 
-// Simple loading component
-const LoadingSpinner = () => (
-  <div className="flex justify-center items-center py-20">
-    <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+const Loader = () => (
+  <div className="flex justify-center items-center py-24">
+    <div className="w-6 h-6 border-2 border-k8s border-t-transparent rounded-full animate-spin" />
   </div>
 );
 
 export default function App() {
   useEffect(() => {
-    // Smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Force scroll to top on load
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
-    
-    return () => {
-      document.documentElement.style.scrollBehavior = 'auto';
-    };
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 text-white">
+    <div className="min-h-screen bg-bg text-white relative">
       <NavBar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Skills />
-        <Suspense fallback={<LoadingSpinner />}>
-          <Projects />
-        </Suspense>
-        <Suspense fallback={<LoadingSpinner />}>
-          <Experience />
-        </Suspense>
-        <Suspense fallback={<LoadingSpinner />}>
-          <Education />
-        </Suspense>
-        <Suspense fallback={<LoadingSpinner />}>
-          <Certifications />
-        </Suspense>
-        <Suspense fallback={<LoadingSpinner />}>
-          <Contact />
-        </Suspense>
+        <Suspense fallback={<Loader />}><Projects /></Suspense>
+        <Suspense fallback={<Loader />}><Experience /></Suspense>
+        <Suspense fallback={<Loader />}><Education /></Suspense>
+        <Suspense fallback={<Loader />}><Certifications /></Suspense>
+        <Suspense fallback={<Loader />}><Contact /></Suspense>
       </main>
       <Footer />
     </div>

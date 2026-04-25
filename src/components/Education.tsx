@@ -1,119 +1,73 @@
-import { education } from "../data/resume";
-import { FaGraduationCap, FaUniversity, FaCalendarAlt, FaBook, FaStar, FaCode, FaDatabase, FaCloud } from "react-icons/fa";
-import { SiPython, SiMysql, SiAmazon } from "react-icons/si";
+import { motion } from 'framer-motion';
+import { education } from '../data/resume';
 
-const getCourseIcon = (course: string) => {
-  const courseLower = course.toLowerCase();
-  if (courseLower.includes('python')) return SiPython;
-  if (courseLower.includes('java')) return FaCode;
-  if (courseLower.includes('dbms') || courseLower.includes('database')) return SiMysql;
-  if (courseLower.includes('aws') || courseLower.includes('cloud')) return SiAmazon;
-  if (courseLower.includes('data structures')) return FaDatabase;
-  if (courseLower.includes('software')) return FaCode;
-  if (courseLower.includes('operating')) return FaCode;
-  if (courseLower.includes('networks')) return FaCloud;
-  return FaBook; // default
-};
+const degreeColors = [
+  { accent: 'k8s', border: 'border-k8s/30', bg: 'bg-k8s/10', text: 'text-k8s', status: 'IN PROGRESS', statusClass: 'badge-k8s' },
+  { accent: 'terminal', border: 'border-terminal/30', bg: 'bg-terminal/10', text: 'text-terminal', status: 'COMPLETED', statusClass: 'badge-success' },
+];
 
 export default function Education() {
   return (
-    <section id="education" className="py-20">
-      <div className="container mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
-              <FaGraduationCap className="text-2xl text-white" />
-            </div>
-            <div className="text-left">
-              <h2 className="text-4xl font-bold gradient-text">Education</h2>
-              <p className="text-cyan-400 font-medium">Academic Journey</p>
-            </div>
-          </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Building a strong foundation in computer science through comprehensive academic programs and hands-on learning experiences
-          </p>
-        </div>
+    <section id="education" className="py-28 relative">
+      <div className="max-w-7xl mx-auto px-6">
 
-        {/* Education Timeline */}
-        <div className="relative max-w-4xl mx-auto">
-          <div className="space-y-12">
-            {education.map((edu, index) => (
-              <div key={index} className="card p-8">
-                {/* Header Section */}
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="section-header"
+        >
+          <div>
+            <div className="section-tag mb-1">05 / BACKGROUND</div>
+            <h2 className="text-3xl font-black text-white tracking-tight">
+              EDUCATION <span className="text-k8s-gradient">HISTORY</span>
+            </h2>
+          </div>
+        </motion.div>
+
+        <div className="space-y-5">
+          {education.map((edu, i) => {
+            const c = degreeColors[i] || degreeColors[1];
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className={`panel p-7 border-l-2 ${c.border}`}
+              >
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                   <div className="flex items-center gap-4">
-                    <div className={`w-16 h-16 bg-gradient-to-r ${index === 0 ? 'from-blue-500 to-purple-600' : 'from-green-500 to-teal-600'} rounded-xl flex items-center justify-center`}>
-                      {index === 0 ? <FaUniversity className="text-2xl text-white" /> : <FaGraduationCap className="text-2xl text-white" />}
+                    <div className={`w-12 h-12 rounded-xl ${c.bg} border ${c.border} flex items-center justify-center`}>
+                      <svg className={`w-6 h-6 ${c.text}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" /></svg>
                     </div>
                     <div>
-                      <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r ${index === 0 ? 'from-blue-500 to-purple-600' : 'from-green-500 to-teal-600'} text-white text-sm font-semibold mb-2`}>
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        {index === 0 ? 'In Progress' : 'Completed'}
-                      </div>
-                      <h3 className="text-2xl font-bold text-white">
-                        {edu.degree}
-                      </h3>
-                      <p className="text-cyan-400 font-semibold text-lg">{edu.school}</p>
+                      <h3 className="text-xl font-bold text-white mb-0.5">{edu.degree}</h3>
+                      <div className={`font-semibold ${c.text}`}>{edu.school}</div>
                     </div>
                   </div>
-                  
                   <div className="text-right">
-                    <div className="flex items-center gap-2 text-gray-400 mb-2">
-                      <FaCalendarAlt />
-                      <span>{edu.period}</span>
-                    </div>
-                    <div className={`text-lg font-bold ${index === 0 ? 'text-blue-400' : 'text-green-400'}`}>
-                      {index === 0 ? 'Expected 2026' : 'First Class'}
-                    </div>
+                    <div className="font-mono text-sm text-subtext mb-2">{edu.period}</div>
+                    <span className={`badge ${c.statusClass}`}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                      {c.status}
+                    </span>
                   </div>
                 </div>
 
-                {/* Coursework */}
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                    <FaBook className={index === 0 ? 'text-blue-400' : 'text-green-400'} />
-                    Relevant Coursework
-                  </h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    {edu.coursework.map((course, courseIndex) => {
-                      const IconComponent = getCourseIcon(course);
-                      return (
-                        <div
-                          key={courseIndex}
-                          className="flex items-center gap-2 p-3 bg-slate-800/50 rounded-lg border border-cyan-400/20 hover:border-cyan-400/50 hover:bg-slate-800 transition-all duration-300"
-                        >
-                          <IconComponent className="text-lg text-cyan-400" />
-                          <span className="text-white font-medium text-sm">{course}</span>
-                        </div>
-                      );
-                    })}
+                  <div className="text-xs font-mono text-subtext tracking-widest mb-3">RELEVANT COURSEWORK</div>
+                  <div className="flex flex-wrap gap-2">
+                    {edu.coursework.map((course) => (
+                      <span key={course} className="tech-tag">{course}</span>
+                    ))}
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Academic Excellence Summary */}
-        <div className="mt-16 card p-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-8">Academic Excellence</h3>
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { label: "Years of Study", value: "6+", icon: FaCalendarAlt, color: "text-blue-400" },
-              { label: "Programming Languages", value: "5+", icon: FaCode, color: "text-green-400" },
-              { label: "Core Subjects", value: "15+", icon: FaBook, color: "text-purple-400" },
-              { label: "Academic Performance", value: "Excellent", icon: FaStar, color: "text-yellow-400" }
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-slate-800/50 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className={`text-2xl ${stat.color}`} />
-                </div>
-                <div className={`text-2xl font-bold ${stat.color} mb-2`}>{stat.value}</div>
-                <div className="text-gray-400 font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

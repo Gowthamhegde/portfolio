@@ -1,284 +1,118 @@
-import { useState } from "react";
-import { skills } from "../data/resume";
-import { FaCode, FaTools, FaCloud, FaUsers, FaPython, FaAws, FaDocker, FaGitAlt, FaCheckCircle, FaArrowRight, FaPlay } from "react-icons/fa";
-import { SiKubernetes, SiTerraform, SiJenkins, SiMongodb, SiMysql, SiNumpy, SiPandas, SiOpencv, SiReact, SiJavascript } from "react-icons/si";
+import { motion } from 'framer-motion';
 
-const getSkillIcon = (skill: string) => {
-  const skillLower = skill.toLowerCase();
-  if (skillLower.includes('python')) return FaPython;
-  if (skillLower.includes('aws')) return FaAws;
-  if (skillLower.includes('docker')) return FaDocker;
-  if (skillLower.includes('kubernetes')) return SiKubernetes;
-  if (skillLower.includes('terraform')) return SiTerraform;
-  if (skillLower.includes('jenkins')) return SiJenkins;
-  if (skillLower.includes('github')) return FaGitAlt;
-  if (skillLower.includes('mongodb')) return SiMongodb;
-  if (skillLower.includes('mysql')) return SiMysql;
-  if (skillLower.includes('numpy')) return SiNumpy;
-  if (skillLower.includes('pandas')) return SiPandas;
-  if (skillLower.includes('opencv')) return SiOpencv;
-  if (skillLower.includes('react')) return SiReact;
-  if (skillLower.includes('javascript')) return SiJavascript;
-  return FaCode; // default
-};
-
-const skillCategories = [
+const skillGroups = [
   {
-    title: "Programming Languages",
-    icon: FaCode,
-    skills: skills.programming,
-    gradient: "from-blue-500 to-purple-600",
-    description: "Core programming languages I use daily"
+    label: 'CLOUD INFRASTRUCTURE',
+    accent: 'aws',
+    skills: ['AWS EC2', 'S3 / RDS', 'VPC & Networking', 'IAM & Security', 'CloudWatch', 'Auto Scaling'],
   },
   {
-    title: "Libraries & Frameworks", 
-    icon: FaTools,
-    skills: skills.libraries,
-    gradient: "from-green-500 to-teal-600",
-    description: "Powerful tools for rapid development"
+    label: 'DEVOPS & AUTOMATION',
+    accent: 'k8s',
+    skills: ['Docker', 'Kubernetes', 'Jenkins', 'GitHub Actions', 'Terraform', 'Ansible'],
   },
   {
-    title: "DevOps & Cloud Tools",
-    icon: FaCloud,
-    skills: skills.tools,
-    gradient: "from-orange-500 to-red-600",
-    description: "Infrastructure and deployment technologies"
+    label: 'DEVELOPMENT',
+    accent: 'terminal',
+    skills: ['Python', 'React / TypeScript', 'Node.js', 'PHP', 'MySQL', 'MongoDB'],
   },
   {
-    title: "Professional Skills",
-    icon: FaUsers,
-    skills: skills.soft,
-    gradient: "from-purple-500 to-pink-600",
-    description: "Essential soft skills for collaboration"
-  }
+    label: 'SECURITY & MONITORING',
+    accent: 'purple',
+    skills: ['Linux Admin', 'Network Security', 'Prometheus', 'Grafana', 'Bash Scripting', 'Nginx'],
+  },
 ];
 
-const cicdPipeline = [
-  {
-    name: "Code",
-    icon: FaGitAlt,
-    description: "Version Control",
-    color: "from-gray-600 to-gray-800"
-  },
-  {
-    name: "Build",
-    icon: SiJenkins,
-    description: "CI/CD Pipeline",
-    color: "from-blue-500 to-blue-700"
-  },
-  {
-    name: "Test",
-    icon: FaCheckCircle,
-    description: "Automated Testing",
-    color: "from-green-500 to-green-700"
-  },
-  {
-    name: "Package",
-    icon: FaDocker,
-    description: "Containerization",
-    color: "from-cyan-500 to-cyan-700"
-  },
-  {
-    name: "Deploy",
-    icon: SiKubernetes,
-    description: "Orchestration",
-    color: "from-purple-500 to-purple-700"
-  },
-  {
-    name: "Monitor",
-    icon: FaAws,
-    description: "Cloud Infrastructure",
-    color: "from-orange-500 to-orange-700"
-  }
+const accentMap: Record<string, { text: string; border: string; bg: string; dot: string }> = {
+  aws:      { text: 'text-aws',        border: 'border-aws/30',        bg: 'bg-aws/10',        dot: 'bg-aws' },
+  k8s:      { text: 'text-k8s',        border: 'border-k8s/30',        bg: 'bg-k8s/10',        dot: 'bg-k8s' },
+  terminal: { text: 'text-terminal',   border: 'border-terminal/30',   bg: 'bg-terminal/10',   dot: 'bg-terminal' },
+  purple:   { text: 'text-purple-400', border: 'border-purple-500/30', bg: 'bg-purple-500/10', dot: 'bg-purple-400' },
+};
+
+const icons: Record<string, string> = {
+  aws: 'CLOUD INFRASTRUCTURE',
+  k8s: 'DEVOPS & AUTOMATION',
+  terminal: 'DEVELOPMENT',
+  purple: 'SECURITY & MONITORING',
+};
+
+const groupIcons = [
+  <svg key="cloud" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>,
+  <svg key="devops" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>,
+  <svg key="dev" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>,
+  <svg key="sec" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>,
 ];
 
 export default function Skills() {
-  const [pipelineRunning, setPipelineRunning] = useState(false);
-  const [completedStages, setCompletedStages] = useState<number[]>([]);
-
-  const runPipeline = async () => {
-    setPipelineRunning(true);
-    setCompletedStages([]);
-
-    for (let i = 0; i < cicdPipeline.length; i++) {
-      await new Promise(resolve => setTimeout(resolve, 800));
-      setCompletedStages(prev => [...prev, i]);
-    }
-
-    setTimeout(() => {
-      setPipelineRunning(false);
-    }, 1000);
-  };
-
   return (
-    <section id="skills" className="py-20">
-      <div className="container mx-auto px-6">
+    <section id="skills" className="py-28 relative">
+      <div className="max-w-7xl mx-auto px-6">
+
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-              <FaCode className="text-2xl text-white" />
-            </div>
-            <div className="text-left">
-              <h2 className="text-4xl font-bold gradient-text">Skills & Expertise</h2>
-              <p className="text-cyan-400 font-medium">Technical Proficiencies</p>
-            </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="section-header"
+        >
+          <div>
+            <div className="section-tag mb-1">02 / CAPABILITIES</div>
+            <h2 className="text-3xl font-black text-white tracking-tight">
+              TECHNICAL <span className="text-k8s-gradient">STACK</span>
+            </h2>
           </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A comprehensive overview of my technical skills, tools, and technologies I work with daily
-          </p>
-        </div>
+          <div className="ml-auto hidden md:flex items-center gap-2 text-xs font-mono text-subtext">
+            <span className="w-2 h-2 rounded-full bg-terminal animate-pulse" />
+            ALL SYSTEMS NOMINAL
+          </div>
+        </motion.div>
 
-        {/* Skills Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-16">
-          {skillCategories.map((category) => (
-            <div
-              key={category.title}
-              className="card group"
-            >
-              {/* Header */}
-              <div className="mb-6">
-                <div className="flex items-center gap-4 mb-3">
-                  <div className={`w-12 h-12 bg-gradient-to-r ${category.gradient} rounded-lg flex items-center justify-center`}>
-                    <category.icon className="text-xl text-white" />
+        {/* Skill Groups */}
+        <div className="grid md:grid-cols-2 gap-5">
+          {skillGroups.map((group, gi) => {
+            const c = accentMap[group.accent];
+            return (
+              <motion.div
+                key={group.label}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: gi * 0.08 }}
+                className={`panel p-6 border-l-2 ${c.border}`}
+              >
+                {/* Group header */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-9 h-9 rounded-lg ${c.bg} border ${c.border} flex items-center justify-center ${c.text}`}>
+                      {groupIcons[gi]}
+                    </div>
+                    <span className="font-mono text-xs font-bold text-white tracking-widest">{group.label}</span>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
-                      {category.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm">{category.description}</p>
-                  </div>
+                  <span className={`badge ${group.accent === 'aws' ? 'badge-aws' : group.accent === 'k8s' ? 'badge-k8s' : 'badge-success'}`}>
+                    ACTIVE
+                  </span>
                 </div>
-              </div>
 
-              {/* Skills Grid */}
-              <div className="grid grid-cols-2 gap-3">
-                {category.skills.map((skill) => {
-                  const IconComponent = getSkillIcon(skill);
-                  
-                  return (
-                    <div
+                {/* Skill chips */}
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill, si) => (
+                    <motion.div
                       key={skill}
-                      className="group/skill"
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: gi * 0.08 + si * 0.04 }}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border ${c.border} hover:${c.bg} transition-all duration-200 cursor-default`}
                     >
-                      <div className="flex items-center gap-2 p-2.5 bg-slate-800/30 rounded-lg hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-cyan-400/20">
-                        <IconComponent className="text-lg text-cyan-400 flex-shrink-0" />
-                        <span className="text-white font-medium text-sm truncate">{skill}</span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* CI/CD Pipeline */}
-        <div className="card p-8">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-white mb-4">CI/CD Pipeline Workflow</h3>
-            <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-              Automated development workflow from code commit to production deployment
-            </p>
-            
-            {/* Start Pipeline Button */}
-            <button
-              onClick={runPipeline}
-              disabled={pipelineRunning}
-              className={`px-8 py-4 rounded-full font-semibold transition-all duration-300 ${
-                pipelineRunning 
-                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
-                  : 'bg-gradient-to-r from-green-500 to-teal-600 text-white hover:shadow-lg hover:shadow-green-500/25'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <FaPlay className={`${pipelineRunning ? 'animate-spin' : ''}`} />
-                {pipelineRunning ? 'Pipeline Running...' : 'Start Pipeline Demo'}
-              </div>
-            </button>
-          </div>
-
-          <div className="relative">
-            {/* Pipeline Flow */}
-            <div className="flex flex-wrap justify-center items-center gap-6 lg:gap-8">
-              {cicdPipeline.map((stage, index) => {
-                const isCompleted = completedStages.includes(index);
-                const isActive = pipelineRunning && completedStages.length === index;
-                
-                return (
-                  <div key={index} className="flex flex-col items-center relative">
-                    {/* Stage Icon */}
-                    <div
-                      className={`w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-r ${stage.color} flex items-center justify-center mb-4 shadow-lg transition-all duration-300 relative ${
-                        isActive ? 'ring-4 ring-cyan-400 ring-opacity-50' : ''
-                      }`}
-                    >
-                      <stage.icon className="text-xl lg:text-2xl text-white" />
-                      
-                      {/* Completion Check */}
-                      {isCompleted && (
-                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center border-2 border-slate-900">
-                          <FaCheckCircle className="text-white text-sm" />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Stage Info */}
-                    <div className="text-center max-w-24 lg:max-w-32">
-                      <h4 className={`font-semibold text-sm lg:text-base mb-1 transition-colors duration-300 ${
-                        isCompleted ? 'text-green-400' : isActive ? 'text-cyan-400' : 'text-white'
-                      }`}>
-                        {stage.name}
-                      </h4>
-                      <p className="text-gray-400 text-xs">{stage.description}</p>
-                    </div>
-
-                    {/* Arrow */}
-                    {index < cicdPipeline.length - 1 && (
-                      <div className="hidden lg:block absolute top-8 left-full ml-4">
-                        <FaArrowRight className={`text-xl transition-colors duration-300 ${
-                          isCompleted ? 'text-green-400' : 'text-cyan-400'
-                        }`} />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Pipeline Benefits */}
-            <div className="grid md:grid-cols-3 gap-6 mt-16">
-              {[
-                {
-                  title: "Automated Testing",
-                  description: "Unit tests, integration tests, and security scans",
-                  icon: FaCheckCircle,
-                  color: "text-green-400"
-                },
-                {
-                  title: "Infrastructure as Code",
-                  description: "Terraform manages all infrastructure with version control",
-                  icon: SiTerraform,
-                  color: "text-purple-400"
-                },
-                {
-                  title: "Container Orchestration",
-                  description: "Kubernetes for scalable and reliable deployments",
-                  icon: SiKubernetes,
-                  color: "text-blue-400"
-                }
-              ].map((benefit, index) => (
-                <div
-                  key={index}
-                  className="bg-slate-800/30 p-6 rounded-lg text-center hover:bg-slate-800/50 transition-all duration-300"
-                >
-                  <benefit.icon className={`text-3xl ${benefit.color} mx-auto mb-4`} />
-                  <h4 className="text-lg font-semibold text-white mb-3">{benefit.title}</h4>
-                  <p className="text-gray-400 text-sm">{benefit.description}</p>
+                      <span className={`w-1.5 h-1.5 rounded-full ${c.dot} flex-shrink-0`} />
+                      <span className={`text-sm font-medium ${c.text}`}>{skill}</span>
+                    </motion.div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
