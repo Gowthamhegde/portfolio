@@ -10,7 +10,7 @@ const highlights = [
   {
     icon: FaCloud,
     title: "Cloud Computing Expertise",
-    description: "Hands-on experience with AWS services, cloud architecture design, and infrastructure automation."
+    description: "Hands-on experience with AWS services, cloud computing , and infrastructure automation."
   },
   {
     icon: FaShieldAlt,

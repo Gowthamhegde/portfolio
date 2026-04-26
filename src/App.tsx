@@ -12,7 +12,7 @@ const Contact = lazy(() => import("./components/Contact"));
 
 const Loader = () => (
   <div className="flex justify-center items-center py-24">
-    <div className="w-6 h-6 border-2 border-k8s border-t-transparent rounded-full animate-spin" />
+    <div className="w-6 h-6 border-2 border-yellow border-t-transparent rounded-full animate-spin" />
   </div>
 );
 

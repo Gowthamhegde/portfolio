@@ -28,23 +28,18 @@ export default function NavBar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-bg/95 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
-          : 'bg-transparent'
+        scrolled ? 'bg-bg/98 border-b-2 border-yellow shadow-[0_4px_0px_#f5c518]' : 'bg-bg/90'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-3 group">
-          <div className="relative">
-            <div className="w-8 h-8 rounded border border-terminal/40 bg-terminal/10 flex items-center justify-center">
-              <span className="text-terminal font-mono text-xs font-bold">GH</span>
-            </div>
-            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-terminal animate-pulse" />
+          <div className="w-9 h-9 bg-yellow flex items-center justify-center font-comic text-black text-sm font-bold shadow-[2px_2px_0px_#000]">
+            GH
           </div>
           <div className="hidden sm:block">
-            <div className="text-white font-bold text-sm tracking-wide">GOUTHAMA HEGDE</div>
-            <div className="text-subtext font-mono text-[10px] tracking-widest">CLOUD · DEVOPS · ENGINEER</div>
+            <div className="font-comic text-white text-lg tracking-widest leading-none">GOUTHAMA HEGDE</div>
+            <div className="text-yellow font-mono text-[10px] tracking-widest">CLOUD · DEVOPS · ENGINEER</div>
           </div>
         </a>
 
@@ -55,10 +50,10 @@ export default function NavBar() {
               key={link.name}
               href={link.href}
               onClick={() => setActive(link.name)}
-              className={`px-3 py-1.5 rounded font-mono text-[11px] font-semibold tracking-widest transition-all duration-200 ${
+              className={`px-3 py-1.5 font-comic text-sm tracking-widest transition-all duration-200 ${
                 active === link.name
-                  ? 'text-k8s bg-k8s/10 border border-k8s/30'
-                  : 'text-subtext hover:text-white hover:bg-white/5'
+                  ? 'text-black bg-yellow shadow-[2px_2px_0px_#000]'
+                  : 'text-gray-400 hover:text-yellow'
               }`}
             >
               {link.name}
@@ -68,16 +63,12 @@ export default function NavBar() {
 
         {/* CTA + Mobile Toggle */}
         <div className="flex items-center gap-3">
-          <a
-            href="#contact"
-            className="hidden md:flex btn-primary text-xs py-2 px-4"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-terminal animate-pulse" />
+          <a href="#contact" className="hidden md:flex btn-primary text-sm py-2 px-5">
             HIRE ME
           </a>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden text-subtext hover:text-white p-2"
+            className="lg:hidden text-yellow p-2"
           >
             <div className="space-y-1.5">
               <span className={`block w-5 h-0.5 bg-current transition-all ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
@@ -95,7 +86,7 @@ export default function NavBar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-bg/98 backdrop-blur-xl border-b border-white/[0.06]"
+            className="lg:hidden bg-bg border-b-2 border-yellow"
           >
             <div className="px-6 py-4 space-y-1">
               {navLinks.map((link) => (
@@ -103,7 +94,7 @@ export default function NavBar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => { setActive(link.name); setMobileOpen(false); }}
-                  className="block px-3 py-2 font-mono text-xs font-semibold tracking-widest text-subtext hover:text-white hover:bg-white/5 rounded transition-all"
+                  className="block px-3 py-2 font-comic text-sm tracking-widest text-gray-400 hover:text-yellow hover:bg-yellow/5 transition-all"
                 >
                   {link.name}
                 </a>
