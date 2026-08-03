@@ -12,6 +12,7 @@ import {
   FaWindows,
   FaSearch
 } from "react-icons/fa";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 import Hero from "./Hero";
 import Skills from "./Skills";
@@ -52,6 +53,7 @@ export default function LaptopOS() {
   const [activeApp, setActiveApp] = useState<AppId | null>(null);
   const [fullscreenApp, setFullscreenApp] = useState<AppId | null>(null);
   const [startMenuOpen, setStartMenuOpen] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const openApp = (id: AppId) => {
     if (!openApps.includes(id)) {
@@ -125,7 +127,7 @@ export default function LaptopOS() {
                   scale: 1, 
                   y: 0,
                   zIndex: isActive ? 50 : 10 + index,
-                  ...(isFullscreen ? {
+                  ...(isFullscreen || isMobile ? {
                     top: 0, left: 0, width: '100%', height: '100%', borderRadius: 0
                   } : {
                     top: `${10 + (index * 3)}%`, 
@@ -196,7 +198,7 @@ export default function LaptopOS() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="absolute bottom-14 left-1/2 -translate-x-1/2 w-[600px] h-[650px] max-w-[95vw] rounded-lg border border-white/10 shadow-2xl z-40 overflow-hidden flex flex-col"
+            className={`absolute bottom-14 left-1/2 -translate-x-1/2 w-[600px] ${isMobile ? 'h-[calc(100vh-64px)] w-full bottom-12 rounded-none' : 'h-[650px] max-w-[95vw] rounded-lg'} border border-white/10 shadow-2xl z-40 overflow-hidden flex flex-col`}
             style={{
               backgroundColor: 'rgba(25, 25, 25, 0.85)',
               backdropFilter: 'blur(30px)',
@@ -222,7 +224,7 @@ export default function LaptopOS() {
                 <span className="text-sm font-semibold text-white">Pinned</span>
                 <button className="text-xs text-yellow hover:underline bg-white/5 px-2 py-1 rounded">All apps &gt;</button>
               </div>
-              <div className="grid grid-cols-6 gap-y-6">
+              <div className="grid grid-cols-4 sm:grid-cols-6 gap-y-6">
                 {APPS.map((app) => (
                   <button 
                     key={app.id} 

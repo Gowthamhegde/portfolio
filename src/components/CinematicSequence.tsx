@@ -87,16 +87,16 @@ export default function CinematicSequence({ children }: CinematicSequenceProps) 
         >
           {/* Left Side: Titles */}
           <div className="text-left max-w-xl z-20 relative">
-            <h2 className="text-yellow font-mono text-xl md:text-2xl mb-4 tracking-widest uppercase">
+            <h2 className="text-yellow font-mono text-sm md:text-xl lg:text-2xl mb-2 md:mb-4 tracking-widest uppercase">
               Welcome to the portfolio of
             </h2>
-            <h1 className="font-comic text-7xl md:text-9xl text-white tracking-widest mb-6 leading-[0.9]">
+            <h1 className="font-comic text-4xl sm:text-6xl md:text-8xl lg:text-9xl text-white tracking-widest mb-4 md:mb-6 leading-[0.9]">
               GOUTHAMA <br /><span className="text-yellow">HEGDE</span>
             </h1>
-            <p className="text-gray-400 text-lg md:text-2xl mb-12 border-l-4 border-yellow pl-5 max-w-md">
+            <p className="text-gray-400 text-sm md:text-lg lg:text-2xl mb-8 md:mb-12 border-l-4 border-yellow pl-3 md:pl-5 max-w-md">
               DevOps Engineer, Cloud Architect & Software Developer.
             </p>
-            <div className="font-mono text-yellow tracking-widest animate-pulse inline-flex items-center gap-3 px-6 py-3 border-2 border-yellow bg-yellow/10">
+            <div className="font-mono text-yellow tracking-widest animate-pulse inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 border-2 border-yellow bg-yellow/10 text-xs md:text-base">
               <span className="w-2 h-2 rounded-full bg-yellow"></span>
               SCROLL TO EXPLORE
             </div>
@@ -106,7 +106,7 @@ export default function CinematicSequence({ children }: CinematicSequenceProps) 
           <motion.img
             src="/me-removebg-preview.png"
             alt="Gouthama Hegde"
-            className="absolute bottom-0 right-[-10%] md:right-10 lg:right-24 max-w-[350px] md:max-w-2xl lg:max-w-[800px] object-contain drop-shadow-[0_0_80px_rgba(245,197,24,0.4)] z-10 origin-bottom"
+            className="absolute bottom-0 right-[-10%] md:right-10 lg:right-24 max-w-[280px] md:max-w-2xl lg:max-w-[800px] object-contain drop-shadow-[0_0_80px_rgba(245,197,24,0.4)] z-10 origin-bottom opacity-30 md:opacity-100"
             animate={{
               scale: [1, 1.02, 1]
             }}
