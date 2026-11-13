@@ -1,172 +1,186 @@
-# Gowthama Hegde - Advanced Portfolio Website
+# 🦀 Gowthama Hegde - Rust + WebAssembly Portfolio (v2.0)
 
-A modern, responsive portfolio website showcasing expertise in DevOps, Cloud Computing, and Software Development. Built with React, TypeScript, and cutting-edge web technologies.
+[![Built with Rust](https://img.shields.io/badge/Built%20with-Rust%201.99-orange?logo=rust)](https://www.rust-lang.org/)
+[![Framework: Leptos](https://img.shields.io/badge/Framework-Leptos%200.6.15-red)](https://leptos.dev/)
+[![Target: WASM](https://img.shields.io/badge/Target-WASM32-purple?logo=webassembly)](https://webassembly.org/)
+[![Bundler: Trunk](https://img.shields.io/badge/Bundled%20with-Trunk-blue)](https://trunkrs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Styling-TailwindCSS%203.4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 
-## 🚀 Features
-
-### Modern Design & Animations
-- **3D Particle Background**: Interactive particle system using @tsparticles
-- **Smooth Animations**: Framer Motion for fluid page transitions and micro-interactions
-- **Glassmorphism UI**: Modern glass-effect cards and components
-- **Gradient Animations**: Dynamic color gradients throughout the interface
-- **Responsive Design**: Optimized for all devices and screen sizes
-
-### Advanced Components
-- **Hero Section**: Animated tech stack visualization with orbiting icons
-- **Skills Cloud**: Interactive skill categories with progress bars
-- **Project Showcase**: Detailed project cards with technology stacks
-- **Experience Timeline**: Professional journey with achievements
-- **Education Modern**: Academic background with coursework details
-- **Certifications**: Learning path and certification progress
-- **Contact Form**: Interactive contact form with validation
-
-### Technical Highlights
-- **TypeScript**: Full type safety and better development experience
-- **Tailwind CSS**: Utility-first CSS framework for rapid styling
-- **React Icons**: Comprehensive icon library for tech stacks
-- **Optimized Performance**: Lazy loading and optimized assets
-- **SEO Optimized**: Meta tags, Open Graph, and Twitter Cards
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React 18, TypeScript, Vite
-- **Styling**: Tailwind CSS, Custom CSS animations
-- **Animations**: Framer Motion, GSAP
-- **Particles**: @tsparticles/react, @tsparticles/slim
-- **Icons**: React Icons (Font Awesome, Simple Icons)
-- **Typography**: React Type Animation
-- **Build Tool**: Vite with TypeScript support
-
-## 📋 Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn package manager
-
-## 🚀 Getting Started
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd gowthama-portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-5. **Preview production build**
-   ```bash
-   npm run preview
-   ```
-
-## 📁 Project Structure
-
-```
-src/
-├── components/           # React components
-│   ├── HeroAdvanced.tsx     # Hero section with 3D elements
-│   ├── AboutMe.tsx          # About section
-│   ├── SkillsCloud.tsx      # Skills visualization
-│   ├── ProjectsAdvanced.tsx # Project showcase
-│   ├── ExperienceTimeline.tsx # Professional experience
-│   ├── EducationModern.tsx  # Education background
-│   ├── CertificationsCloud.tsx # Certifications & learning
-│   ├── ContactAdvanced.tsx  # Contact form
-│   ├── NavBar.tsx          # Navigation component
-│   ├── Footer.tsx          # Footer component
-│   ├── ParticleBackground.tsx # Particle system
-│   └── ScrollProgress.tsx   # Scroll progress indicator
-├── data/                # Static data files
-├── App.tsx              # Main application component
-├── main.tsx            # Application entry point
-└── index.css           # Global styles and animations
-```
-
-## 🎨 Customization
-
-### Colors & Themes
-The portfolio uses a dark theme with cyan/blue gradients. You can customize colors in:
-- `src/index.css` - CSS custom properties and gradients
-- `tailwind.config.js` - Tailwind color palette
-
-### Content Updates
-Update personal information in:
-- `src/components/HeroAdvanced.tsx` - Personal details and contact info
-- `src/components/AboutMe.tsx` - About section content
-- `src/components/SkillsCloud.tsx` - Technical skills and proficiency
-- `src/components/ProjectsAdvanced.tsx` - Project details and links
-- `src/components/ExperienceTimeline.tsx` - Work experience
-- `src/components/EducationModern.tsx` - Educational background
-
-### Adding New Sections
-1. Create a new component in `src/components/`
-2. Import and add to `src/App.tsx`
-3. Update navigation in `src/components/NavBar.tsx`
-
-## 🌟 Key Features Implemented
-
-### DevOps & Cloud Focus
-- AWS services showcase
-- Container orchestration (Docker, Kubernetes)
-- Infrastructure as Code (Terraform)
-- CI/CD pipeline visualization
-- Cloud architecture expertise
-
-### Interactive Elements
-- Particle background with mouse interaction
-- Hover effects on all interactive elements
-- Smooth scroll navigation
-- Progress indicators for skills and certifications
-- Animated counters and statistics
-
-### Performance Optimizations
-- Lazy loading for images
-- Optimized bundle size with Vite
-- Efficient re-renders with React best practices
-- Preloaded critical resources
-
-## 📱 Responsive Design
-
-The portfolio is fully responsive and optimized for:
-- Desktop (1920px+)
-- Laptop (1024px - 1919px)
-- Tablet (768px - 1023px)
-- Mobile (320px - 767px)
-
-## 🔧 Development
-
-### Available Scripts
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-
-### Code Quality
-- TypeScript for type safety
-- Modern React patterns and hooks
-- Component-based architecture
-
-## 📞 Contact
-
-**Gowthama Hegde**
-- Email: gowthamhegde606@gmail.com
-- Phone: +91 7760190064
-- Location: Bengaluru, India
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
+A high-performance, next-generation portfolio engineered in **100% pure Rust compiled to WebAssembly (WASM)**. Built from scratch with the **Leptos** framework and bundled with **Trunk**, this application eliminates traditional JavaScript runtime overhead, achieving near-native performance, fine-grained reactivity without a Virtual DOM, and an authentic Windows 11 desktop environment ("LaptopOS").
 
 ---
 
-Built with ❤️ using React, TypeScript, and modern web technologies.
+## ⚡ Why Rust + WebAssembly?
+
+| Metric / Dimension | Traditional JS/React App | GowthamaOS (Rust + WASM) |
+| :--- | :--- | :--- |
+| **Runtime Language** | Interpreted JavaScript | Native WebAssembly bytecode |
+| **Reactivity** | Virtual DOM diffing & re-renders | Fine-grained signals with direct DOM updates |
+| **Thread Safety & Types** | Dynamic / Compile-time TS only | Strong static Rust compiler guarantees |
+| **Memory Footprint** | Garbage-collected JS heap | Linear WebAssembly memory buffer |
+| **Release WASM Size** | ~1.5 - 3 MB JS bundle | **~669 KB** (opt-level 3, LTO, panic=abort) |
+| **Compute Execution** | Single-threaded JS engine | Near-native CPU throughput |
+
+---
+
+## 🚀 Advanced Architecture & Features
+
+### 1. 🎬 Cinematic Scroll Intro Sequence
+- **Spring-mass-damper physics** computed in pure Rust driving video scrubbing via `requestAnimationFrame`.
+- Seamless scroll-linked transitions mapping 0–100% scroll progress:
+  - Entrance 3D avatar layer with smooth scale, opacity, and Y-offset.
+  - Laptop hardware mockup with synchronous MP4 video timeline scrubbing.
+  - Cinematic 15x zoom into screen transitioning into the desktop OS.
+- Quick **"Skip Intro"** control for instant navigation.
+
+### 2. 💻 LaptopOS — Windows 11 Desktop Metaphor
+- **Multi-Window Management System**:
+  - Drag, cascade, maximize/restore, minimize, and close windows.
+  - Active window focus with dynamic z-index stacking.
+  - Custom comic-book aesthetic styling with yellow accents (`#f5c518`) and acrylic backdrop blur.
+- **Glassmorphic Taskbar**:
+  - Windows Start button with fluid launch animation.
+  - Live running application tabs with active indicator dots.
+  - Real-time system tray with hours/minutes/seconds AM/PM clock and calendar.
+  - Sound effects toggle (Synthesized Web Audio API).
+  - Rust WASM status badge.
+- **Start Menu**:
+  - Live fuzzy search filtering across all portfolio apps and capabilities.
+  - Pinned applications grid.
+  - Profile overview card and user account footer.
+
+### 3. ⌨️ GowthamOS Interactive Virtual Terminal (CLI)
+- Built-in virtual Linux shell written in Rust:
+  - `help`: System commands inspection.
+  - `neofetch`: Custom ASCII art system monitor showing kernel, uptime, and host environment.
+  - `whoami`: Operator identity and bio.
+  - `skills` & `projects`: Formatted terminal data matrices.
+  - `aws [ec2|s3]`: Simulated AWS CLI operations.
+  - `docker [ps]` & `kubectl [get]`: Infrastructure container & pod queries.
+  - `terraform`: Simulated plan & apply infrastructure state.
+  - `cat <file>`: Virtual filesystem reading (`Dockerfile`, `main.tf`, `resume.pdf`).
+  - `bench`: Real-time WebAssembly CPU compute benchmark.
+  - `matrix`: Digital falling rain visualizer mode.
+  - `clear`: Terminal buffer clear.
+- Full arrow-key command history (Up/Down) navigation.
+
+### 4. ☁️ AWS Cloud Architecture Visualizer
+- Interactive topological network graph representing a production AWS cloud architecture:
+  - **Internet Gateway ➔ Application Load Balancer ➔ EC2 Auto Scaling Group ➔ Multi-AZ RDS MySQL & Amazon S3**.
+- Clickable nodes with inspector drawer showing:
+  - Service descriptions and High Availability details.
+  - Real Terraform HCL code configurations.
+  - Live simulated latency, RPS, and health metrics.
+- **"Simulate Traffic Surge"** mode with packet visualizer and auto-scaling response.
+
+### 5. 🛠️ Live CI/CD Deployment Pipeline Simulator
+- Real-time simulated deployment runner:
+  - Steps: Cargo Test & Lint ➔ Trunk WASM Build ➔ Docker Containerize ➔ Trivy Vulnerability Scan ➔ Terraform Apply ➔ Production Health Verification.
+- Real-time streaming console logs with step-by-step progress spinners and duration telemetry.
+
+### 6. 📊 Rust WASM Native Benchmark & Diagnostics Engine
+- Live diagnostics panel showing WebAssembly target architecture (`wasm32-unknown-unknown`), frame rate, and signal reactivity model.
+- **CPU Hash Stress Test**: Executes 500,000 non-linear mixing loops in pure WebAssembly, reporting elapsed milliseconds and million operations per second (MOPS).
+
+### 7. 🌌 Interactive Particle Constellation Canvas
+- 60 FPS HTML5 canvas particle simulation computed in Rust via `web-sys`.
+- Dynamic distance-based constellation links and gravitational drift.
+
+### 8. 🔊 Web Audio API Procedural Sound Synthesizer
+- Procedurally synthesized futuristic UI audio (clicks, window chimes, terminal keystroke blips) using `web_sys::AudioContext` and oscillators — zero external MP3 assets needed.
+- Mute/unmute toggle in the taskbar.
+
+---
+
+## 📁 Project Directory Structure
+
+```text
+portfolio/
+├── Cargo.toml                  # Rust package manifest (Leptos, web-sys, wasm-bindgen)
+├── Trunk.toml                  # Trunk build bundler configuration
+├── input.css                   # Tailwind CSS root stylesheet with comic styling
+├── tailwind.config.js          # Tailwind configuration for Rust .rs content
+├── index.html                  # Trunk HTML template and entrypoint
+├── public/                     # Static media assets (images, video, PDF)
+│   ├── me-removebg-preview.png
+│   ├── Timeline 1.mp4
+│   ├── profilepic.jpg
+│   └── resume.pdf
+├── dist/                       # Trunk release build output (HTML, WASM, JS, CSS)
+├── src/                        # Rust Application Source Code
+│   ├── main.rs                 # Application entrypoint & Leptos mount
+│   ├── app.rs                  # Root component
+│   ├── data/
+│   │   ├── mod.rs
+│   │   └── resume.rs           # Strongly typed portfolio data structures
+│   └── components/
+│       ├── mod.rs              # Component module exports
+│       ├── audio.rs            # Web Audio API procedural sound engine
+│       ├── canvas_particles.rs # High-fps 2D constellation canvas in WASM
+│       ├── cinematic_sequence.rs# Scroll-linked video & 3D intro sequence
+│       ├── hero.rs             # Hero section with role cycling & stats
+│       ├── skills.rs           # Technical stack matrices with filter pills
+│       ├── projects.rs         # Deployment registry with architecture tags
+│       ├── experience.rs       # Work timeline & opportunities CTA
+│       ├── education.rs        # Academic background & coursework
+│       ├── certifications.rs   # Verified credential cards & links
+│       ├── contact.rs          # Formspree message dispatcher in Rust
+│       ├── terminal.rs         # GowthamOS interactive virtual shell
+│       ├── aws_visualizer.rs   # AWS architecture topology & Terraform inspector
+│       ├── pipeline_runner.rs  # DevOps CI/CD pipeline simulator
+│       ├── benchmark.rs        # Rust WASM performance benchmark suite
+│       └── laptop_os.rs        # Windows 11 Desktop metaphor & window manager
+└── legacy-react/               # Preserved legacy React/TypeScript codebase
+```
+
+---
+
+## 🛠️ Build & Development Commands
+
+### Prerequisites
+1. **Rust Toolchain**: Install from [rustup.rs](https://rustup.rs/)
+2. **WASM Target**:
+   ```bash
+   rustup target add wasm32-unknown-unknown
+   ```
+3. **Trunk**:
+   ```bash
+   cargo install trunk
+   ```
+4. **Tailwind CSS CLI**: Standalone binary or via npm (`tailwindcss`)
+
+### Development Server
+Run the local dev server with hot-reload:
+```bash
+trunk serve
+```
+Open your browser at `http://127.0.0.1:8080`.
+
+### Production Release Build
+Compile an optimized production build into `dist/`:
+```bash
+trunk build --release
+```
+The output `dist/` directory contains:
+- `index.html`: Optimized HTML entrypoint.
+- `*.wasm`: Stripped, optimized WebAssembly binary (~669 KB).
+- `*.js`: Lightweight wasm-bindgen JS glue code.
+- `*.css`: Purged, minified Tailwind CSS.
+- Static media assets (`Timeline 1.mp4`, images, `resume.pdf`).
+
+### Deployment
+The contents of `dist/` are static files ready for deployment on any CDN or hosting platform:
+- **GitHub Pages**
+- **AWS S3 + CloudFront**
+- **Vercel** / **Cloudflare Pages** / **Netlify**
+
+---
+
+## 👤 Author
+
+**Gowthama Hegde**
+- **Role:** Cloud Architect, DevOps Engineer & Systems Developer
+- **Location:** Bengaluru, Karnataka
+- **Email:** [gowthamhegde606@gmail.com](mailto:gowthamhegde606@gmail.com)
+- **LinkedIn:** [gowtham-hegde](https://www.linkedin.com/in/gowtham-hegde-3bb374320)
+- **GitHub:** [@Gowthamhegde](https://github.com/Gowthamhegde)

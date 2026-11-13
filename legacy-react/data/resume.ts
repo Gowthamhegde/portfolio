@@ -55,6 +55,34 @@ export const projects = [
     description:
       "Personal portfolio website showcasing projects and skills with modern design, interactive animations, and optimized performance. Built with React and TypeScript.",
     tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"]
+  },
+  {
+    name: "Air Writing Recognition",
+    href: "https://github.com/Gowthamhegde/handwriting-detection-air",
+    description:
+      "Deep learning air-writing recognition system that tracks hand gestures through a webcam and converts written letters and words into text with voice feedback.",
+    tech: ["Python", "TensorFlow", "CNN-BiLSTM", "MediaPipe", "OpenCV"]
+  },
+  {
+    name: "lazyk8s",
+    href: "https://github.com/Gowthamhegde/lazyk8s",
+    description:
+      "Interactive Kubernetes terminal UI for monitoring pods, nodes, deployments, services, events, resource usage, and cluster contexts without running individual kubectl commands.",
+    tech: ["Python", "Kubernetes", "kubectl", "Textual", "TUI"]
+  },
+  {
+    name: "PayScope",
+    href: "https://github.com/Gowthamhegde/CareerScope",
+    description:
+      "MERN career intelligence platform for exploring jobs, analyzing salary trends, visualizing market data, and predicting salaries from skills and experience.",
+    tech: ["MongoDB", "Express.js", "React", "Node.js", "Tailwind CSS"]
+  },
+  {
+    name: "RinseUp Laundry Service",
+    href: "https://github.com/Gowthamhegde/lundry",
+    description:
+      "Full-stack laundry service application with service browsing, pickup booking, order tracking, admin management, Supabase authentication, and Razorpay payment integration.",
+    tech: ["Next.js", "React", "TypeScript", "Supabase", "Razorpay"]
   }
 ];
 

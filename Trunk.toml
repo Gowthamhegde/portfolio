@@ -1,0 +1,9 @@
+[build]
+target = "index.html"
+dist = "dist"
+offline = true
+
+[[hooks]]
+stage = "pre_build"
+command = "tailwindcss"
+command_arguments = ["-i", "input.css", "-o", "public/style.css"]

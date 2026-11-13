@@ -1,0 +1,19 @@
+pub mod audio;
+pub mod canvas_particles;
+pub mod cinematic_sequence;
+pub mod hero;
+pub mod skills;
+pub mod projects;
+pub mod experience;
+pub mod education;
+pub mod certifications;
+pub mod contact;
+pub mod terminal;
+pub mod aws_visualizer;
+pub mod pipeline_runner;
+pub mod benchmark;
+pub mod laptop_os;
+
+pub use canvas_particles::CanvasParticles;
+pub use cinematic_sequence::CinematicSequence;
+pub use laptop_os::LaptopOS;
